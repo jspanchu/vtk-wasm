@@ -1,2 +1,3 @@
 # vtk-wasm
-Guides and documentation around VTK.wasm
+
+Guides and documentation for VTK.wasm
