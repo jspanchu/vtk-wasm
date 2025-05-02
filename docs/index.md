@@ -8,7 +8,7 @@ hero:
   tagline: Unleash the power of VTK onto the Web
   image:
     # src: /assets/images/tauri-wasm-widget.png
-    src: /assets/images/wasm-widgets.png
+    src: /wasm-widgets.png
     title: Example of VTK.wasm using inside a trame application
     alt: Example of VTK.wasm using inside a trame application
   actions:
