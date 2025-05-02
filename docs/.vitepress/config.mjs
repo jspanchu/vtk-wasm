@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  base: "/VTK-wasm",
+  base: "/vtk-wasm",
   title: "VTK.wasm",
   description: "Guides and documentation around VTK.wasm",
   lastUpdated: true,
