@@ -22,9 +22,24 @@ In this context we provide the URL where the WASM bundle can be found and used f
 
 In this example we pre-load the WASM module and use `vtkWASM` without any URL.
 
+> [!CAUTION]
+> Not working yet... Need to fix it!
+
 ::: code-group
 
-<<< ../../public/demo/preload-plain-javascript.html
+<<< ../../public/demo/plain-javascript-preload.html
+<<< ../../public/demo/example.js
+
+:::
+
+
+## Use script annotation
+
+In this example we tag the script to autoload WASM and create a global vtk namespace.
+
+::: code-group
+
+<<< ../../public/demo/plain-javascript-annotation.html
 <<< ../../public/demo/example.js
 
 :::

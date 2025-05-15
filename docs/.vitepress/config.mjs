@@ -64,7 +64,7 @@ export default defineConfig({
           items: [
             { text: 'Getting started', link: '/guide/js/index' },
             { text: 'Plain JavaScript', link: '/guide/js/plain' },
-            { text: 'Building an application', link: '/guide/js/app' },
+            { text: 'Building an application', link: '/guide/js/bundler' },
           ]
         },
         {
