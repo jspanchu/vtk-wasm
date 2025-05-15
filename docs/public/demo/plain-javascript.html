@@ -1,0 +1,14 @@
+<html>
+    <head>
+        <script src="example.js"></script>
+        <script src="https://unpkg.com/@kitware/trame-vtklocal@1.0.0/dist/umd/vtk.umd.js"></script>
+    </head>
+    <body>
+        <canvas id="vtk-wasm-window"></canvas>
+        <script>
+            vtkWASM
+              .createNamespace("/vtk-wasm/wasm32/9.5.0")
+              .then(buildWASMScene);
+        </script>
+    </body>
+</html>

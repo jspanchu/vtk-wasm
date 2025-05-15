@@ -7,9 +7,8 @@ export default defineConfig({
   description: "Guides and documentation around VTK.wasm",
   lastUpdated: true,
   head: [
-    ['link', { rel: "apple-touch-icon", sizes: "196x196", href: "/VTK-wasm/logos/favicon-196x196.png"}],
-    ['link', { rel: "icon", type: "image/png", sizes: "32x32", href: "/VTK-wasm/logos/favicon-32x32.png"}],
-    ['link', { rel: "icon", type: "image/png", sizes: "16x16", href: "/VTK-wasm/logos/favicon-16x16.png"}],
+    ['link', { rel: "apple-touch-icon", sizes: "196x196", href: "/vtk-wasm/logos/favicon-196x196.png"}],
+    ['link', { rel: "icon", type: "image/png", href: "/vtk-wasm/logos/favicon-32x32.png"}],
     [
       'script',
       { async: '', src: 'https://www.googletagmanager.com/gtag/js?id=G-LLSX9WG6YK' }
@@ -25,6 +24,8 @@ export default defineConfig({
   ],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
+    logo: '/logo.svg',
+    siteTitle: false,
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Guides', link: '/guide/' },
@@ -62,7 +63,7 @@ export default defineConfig({
           text: 'For JavaScript developers',
           items: [
             { text: 'Getting started', link: '/guide/js/index' },
-            { text: 'Built-in WASM library', link: '/guide/js/lib' },
+            { text: 'Plain JavaScript', link: '/guide/js/plain' },
             { text: 'Building an application', link: '/guide/js/app' },
           ]
         },
