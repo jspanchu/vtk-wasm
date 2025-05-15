@@ -21,6 +21,10 @@ export default defineConfig({
        gtag('js', new Date());
        gtag('config', 'G-LLSX9WG6YK');`
     ],
+    [
+      'script',
+      { defer: '', src: 'js/hero.js' }
+    ]
   ],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
@@ -29,14 +33,14 @@ export default defineConfig({
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Guides', link: '/guide/' },
-      { text: 'Use Cases', link: '/usecase/' },
+      // { text: 'Use Cases', link: '/usecase/' },
       {
         text: 'Resources',
         items: [
-          { text: 'Documentation', link: 'https://docs.paraview.org/en/latest/Catalyst/index.html' },
+          // { text: 'Documentation', link: 'https://docs.paraview.org/en/latest/Catalyst/index.html' },
           { text: 'Blogs', link: 'https://www.kitware.com/blog/' },
-          { text: 'Discussions', link: 'https://discourse.paraview.org/c/in-situ-support' },
-          { text: 'Issue Tracker', link: 'https://gitlab.kitware.com/groups/paraview/-/issues' },
+          // { text: 'Discussions', link: 'https://discourse.paraview.org/c/in-situ-support' },
+          { text: 'Issue Tracker', link: 'https://gitlab.kitware.com/groups/vtk/-/issues' },
           { text: 'Webinars', link: 'https://www.kitware.com/webinars/' },
           { text: 'Services', link: 'https://www.kitware.com/support' },
         ]
@@ -54,9 +58,9 @@ export default defineConfig({
         {
           text: 'For C++ developers',
           items: [
-            { text: 'Getting started', link: '/guide/cpp/index' },
-            { text: 'Tools', link: '/guide/cpp/tools' },
-            { text: 'Building an application', link: '/guide/cpp/app' },
+            // { text: 'Getting started', link: '/guide/cpp/index' },
+            // { text: 'Tools', link: '/guide/cpp/tools' },
+            // { text: 'Building an application', link: '/guide/cpp/app' },
           ]
         },
         {
@@ -70,9 +74,9 @@ export default defineConfig({
         {
           text: 'For trame users',
           items: [
-            { text: 'Getting started', link: '/guide/trame/index' },
-            { text: 'Concepts', link: '/guide/trame/concepts' },
-            { text: 'How to use it', link: '/guide/trame/usage' },
+            // { text: 'Getting started', link: '/guide/trame/index' },
+            // { text: 'Concepts', link: '/guide/trame/concepts' },
+            // { text: 'How to use it', link: '/guide/trame/usage' },
           ]
         },
       ],

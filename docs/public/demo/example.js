@@ -61,7 +61,7 @@ async function buildWASMScene(vtk) {
     // Getting values from method call (async) or property (sync)
     console.log("NumberOfPoints:", await polyData.GetNumberOfPoints()); 
     console.log("NumberOfCells:", await polyData.GetNumberOfCells());
-    console.log("PolyDataBounds:", polyData.Bounds);
+    console.log("PolyDataBounds:", await polyData.GetBounds());
 
     // Create object with properties in constructor
     const mapper = vtk.vtkPolyDataMapper();

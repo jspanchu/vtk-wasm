@@ -1,17 +1,17 @@
 <html>
     <head>
-        <script src="example.js"></script>
         <script 
-            src="https://unpkg.com/@kitware/trame-vtklocal@1.0.0/dist/umd/vtk.umd.js"
-            id="vtk-wasm"
-            data-url="/vtk-wasm/wasm32/9.5.0"
+        src="https://unpkg.com/@kitware/trame-vtklocal@1.0.1/dist/umd/vtk.umd.js"
+        id="vtk-wasm"
+        data-url="/vtk-wasm/wasm32/9.5.0"
         ></script>
+        <script src="example.js"></script>
     </head>
     <body>
         <canvas id="vtk-wasm-window"></canvas>
         <script>
-            vtkReady.then(() => {
-                buildWASMScene(window.vtk);
+            vtkReady.then((vtk) => {
+                buildWASMScene(vtk); // Also available on window.vtk
             });
         </script>
     </body>
