@@ -15,7 +15,7 @@ class Cone(TrameApp):
         self._build_ui()
 
     def _setup_vtk(self):
-        #region vtk
+        # region vtk
         renderer = vtk.vtkRenderer()
         renderWindow = vtk.vtkRenderWindow()
         renderWindow.AddRenderer(renderer)
@@ -33,7 +33,7 @@ class Cone(TrameApp):
         renderer.AddActor(actor)
         renderer.ResetCamera()
         renderWindow.Render()
-        #endregion vtk
+        # endregion vtk
 
         self.render_window = renderWindow
         self.cone = cone_source
@@ -70,14 +70,14 @@ class Cone(TrameApp):
                 )
 
             with layout.content:
-                #region widget
+                # region widget
                 with vtklocal.LocalView(
                     self.render_window,
                     throttle_rate=20,
                 ) as view:
                     self.ctrl.view_update = view.update_throttle
                     self.ctrl.view_reset_camera = view.reset_camera
-                #endregion widget
+                # endregion widget
 
     @change("resolution")
     def on_resolution(self, resolution, **_):

@@ -58,7 +58,7 @@ class Clip(TrameApp):
         renderer.ResetCamera()
         renderWindow.Render()
 
-        #region widget
+        # region widget
         # Widget setup
         rep = vtk.vtkImplicitPlaneRepresentation(
             place_factor=1.25,
@@ -73,7 +73,7 @@ class Clip(TrameApp):
             interactor=renderWindowInteractor, representation=rep
         )
         plane_widget.On()
-        #endregion widget
+        # endregion widget
 
         self.plane = plane
         self.render_window = renderWindow
@@ -110,7 +110,7 @@ class Clip(TrameApp):
                 )
 
             with layout.content:
-                #region trameWidget
+                # region trameWidget
                 with vtklocal.LocalView(
                     self.render_window,
                     throttle_rate=20,
@@ -151,7 +151,7 @@ class Clip(TrameApp):
                     # => reserve state variable for widget update
                     self.state.plane_widget = None
 
-    #endregion trameWidget
+    # endregion trameWidget
 
     @change("show_ctx")
     def on_show_ctx(self, show_ctx, **_):
@@ -163,7 +163,7 @@ class Clip(TrameApp):
         self.actor.property.opacity = opacity
         self.ctrl.view_update()
 
-    #region trameChange
+    # region trameChange
     @change("plane_widget")
     def on_plane_widget(self, plane_widget, **_):
         if plane_widget is None:
@@ -176,7 +176,8 @@ class Clip(TrameApp):
         self.plane.SetNormal(normal)
 
         self.ctrl.view_update()
-    #endregion trameChange
+
+    # endregion trameChange
 
 
 def main():

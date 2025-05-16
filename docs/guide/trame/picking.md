@@ -9,10 +9,10 @@ In the example below we cover how you can create such widget in plain VTK and ho
 The code below highlight some important region and logic to understand.
 
 ::: code-group
-<<< ../../../examples/trame/picking/pick.py#vtk{py:line-numbers=45} [VTK 3D Widget]
-<<< ../../../examples/trame/picking/pick.py#trameWidget{py:line-numbers=85} [Trame widget]
-<<< ../../../examples/trame/picking/pick.py#trameChange{py:line-numbers=121} [State change]
-<<< ../../../examples/trame/picking/pick.py#py2wasmCall{py:line-numbers=130} [Method call]
+<<< ../../../examples/trame/picking/pick.py#vtk{py:line-numbers=42} [VTK 3D Widget]
+<<< ../../../examples/trame/picking/pick.py#trameWidget{py:line-numbers=82} [Trame widget]
+<<< ../../../examples/trame/picking/pick.py#trameChange{py:line-numbers=118} [State change]
+<<< ../../../examples/trame/picking/pick.py#py2wasmCall{py:line-numbers=128} [Method call]
 <<< ../../../examples/trame/picking/pick.py{py:line-numbers} [Full code (pick.py)]
 <<< ../../../examples/trame/picking/requirements.txt
 :::

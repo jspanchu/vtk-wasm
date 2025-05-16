@@ -16,22 +16,19 @@ RND_SEQ.SetSeed(8775070)
 
 
 def next_color():
-    r = RND_SEQ.GetRangeValue(0.4, 1.0)
-    RND_SEQ.Next()
-    g = RND_SEQ.GetRangeValue(0.4, 1.0)
-    RND_SEQ.Next()
-    b = RND_SEQ.GetRangeValue(0.4, 1.0)
-    RND_SEQ.Next()
-
-    return (r, g, b)
+    rgb = []
+    for _ in range(3):
+        rgb.append(RND_SEQ.GetRangeValue(0.4, 1.0))
+        RND_SEQ.Next()
+    return rgb
 
 
 def apply_settings(property):
     property.diffuse_color = next_color()
-    property.diffuse = (0.8,)
-    property.specular = (0.5,)
-    property.specular_color = ((1, 1, 1),)
-    property.specular_power = (30,)
+    property.diffuse = 0.8
+    property.specular = 0.5
+    property.specular_color = (1, 1, 1)
+    property.specular_power = 30
 
 
 class Pick(TrameApp):
@@ -41,7 +38,7 @@ class Pick(TrameApp):
         self._build_ui()
 
     def _setup_vtk(self):
-        #region vtk
+        # region vtk
         renderer = vtk.vtkRenderer()
         renderWindow = vtk.vtkRenderWindow()
         renderWindow.AddRenderer(renderer)
@@ -69,7 +66,7 @@ class Pick(TrameApp):
         self.last_picked_property = vtk.vtkProperty()
         self.renderer = renderer
         self.render_window = renderWindow
-        #endregion vtk
+        # endregion vtk
 
     def _build_ui(self):
         with VAppLayout(self.server) as layout:
@@ -81,7 +78,7 @@ class Pick(TrameApp):
                 style="top:1rem;right:1rem;z-index:1;position:absolute;",
             )
 
-            #region trameWidget
+            # region trameWidget
             with vtklocal.LocalView(
                 self.render_window,
                 throttle_rate=20,
@@ -104,7 +101,7 @@ class Pick(TrameApp):
                     {
                         wasm_interactor_id: {
                             # Use "MouseMoveEvent" for more flashy interaction
-                            "LeftButtonPressEvent": { 
+                            "LeftButtonPressEvent": {
                                 "clicked_pos": {
                                     "x": (wasm_interactor_id, "EventPosition", 0),
                                     "y": (wasm_interactor_id, "EventPosition", 1),
@@ -115,18 +112,19 @@ class Pick(TrameApp):
                 )
                 # => reserve state variable for widget update
                 self.state.clicked_pos = None
-            #endregion trameWidget
+            # endregion trameWidget
 
-    #region trameChange
+    # region trameChange
     @change("clicked_pos")
     def on_click(self, clicked_pos, **_):
         if clicked_pos is None:
             return
 
         asynchronous.create_task(self._pick_actor(**clicked_pos))
-    #endregion trameChange
 
-    #region py2wasmCall
+    # endregion trameChange
+
+    # region py2wasmCall
     async def _pick_actor(self, x, y):
         # Trigger a pick on client
         picked_worked = await self.ctx.wasm_view.invoke(
@@ -155,7 +153,7 @@ class Pick(TrameApp):
         # Render
         self.ctx.wasm_view.update()
 
-        #endregion py2wasmCall
+        # endregion py2wasmCall
 
 
 def main():

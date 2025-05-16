@@ -1,0 +1,1 @@
+# VTK.wasm viewer data format

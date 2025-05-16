@@ -21,10 +21,10 @@ export default defineConfig({
        gtag('js', new Date());
        gtag('config', 'G-LLSX9WG6YK');`
     ],
-    [
-      'script',
-      { defer: '', src: 'js/hero.js' }
-    ]
+    // [
+    //   'script',
+    //   { defer: '', src: 'js/hero.js' }
+    // ]
   ],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
@@ -77,6 +77,13 @@ export default defineConfig({
             { text: 'Getting started', link: '/guide/trame/index' },
             { text: '3D Widgets', link: '/guide/trame/widget' },
             { text: 'Method call', link: '/guide/trame/picking' },
+          ]
+        },
+        {
+          text: 'As a data viewer',
+          items: [
+            { text: 'Getting started', link: '/guide/viewer/index' },
+            { text: 'Generating data', link: '/guide/viewer/data' },
           ]
         },
       ],
