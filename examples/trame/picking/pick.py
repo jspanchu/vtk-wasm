@@ -157,7 +157,12 @@ class Pick(TrameApp):
 
 
 def main():
+    import sys
+
     app = Pick()
+    if "--export" in sys.argv:
+        app.ctx.wasm_view.save("porsche.wazex")
+
     app.server.start()
 
 

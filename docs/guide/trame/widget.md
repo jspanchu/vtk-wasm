@@ -11,7 +11,7 @@ The code below highlight some important region and logic to understand.
 ::: code-group
 <<< ../../../examples/trame/widget/clip.py#widget{py:line-numbers=62} [VTK 3D Widget]
 <<< ../../../examples/trame/widget/clip.py#trameWidget{py:line-numbers=114} [Trame widget]
-<<< ../../../examples/trame/widget/clip.py#trameChange{py:line-numbers=167} [State change]
+<<< ../../../examples/trame/widget/clip.py#trameChange{py:line-numbers=168} [State change]
 <<< ../../../examples/trame/widget/clip.py{py:line-numbers} [Full code (clip.py)]
 <<< ../../../examples/trame/widget/requirements.txt
 :::

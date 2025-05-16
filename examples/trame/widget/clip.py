@@ -114,6 +114,7 @@ class Clip(TrameApp):
                 with vtklocal.LocalView(
                     self.render_window,
                     throttle_rate=20,
+                    ctx_name="wasm_view",
                 ) as view:
                     self.ctrl.view_update = view.update_throttle
                     self.ctrl.view_reset_camera = view.reset_camera
@@ -181,7 +182,12 @@ class Clip(TrameApp):
 
 
 def main():
+    import sys
+
     app = Clip()
+    if "--export" in sys.argv:
+        app.ctx.wasm_view.save("star-fighter.wazex")
+
     app.server.start()
 
 
