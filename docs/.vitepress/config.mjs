@@ -74,9 +74,9 @@ export default defineConfig({
         {
           text: 'For trame users',
           items: [
-            // { text: 'Getting started', link: '/guide/trame/index' },
-            // { text: 'Concepts', link: '/guide/trame/concepts' },
-            // { text: 'How to use it', link: '/guide/trame/usage' },
+            { text: 'Getting started', link: '/guide/trame/index' },
+            { text: '3D Widgets', link: '/guide/trame/widget' },
+            { text: 'Method call', link: '/guide/trame/picking' },
           ]
         },
       ],

@@ -9,10 +9,8 @@ The following examples rely on loading the `vtk.umd.js` bundle from a CDN. Also 
 In this example we pre-load the WASM module and therefore we don't need to provide any URL for loading it when creating the __vtk__ namespace.
 
 ::: code-group
-
 <<< ../../public/demo/plain-javascript-preload.html
 <<< ../../public/demo/example.js
-
 :::
 
 ## Defer WASM loading
@@ -23,20 +21,17 @@ In this example, since we didn't load the WASM module, we need to specify from w
 In this context we provide the URL where the WASM bundle can be found and used from.
 
 ::: code-group
-
 <<< ../../public/demo/plain-javascript.html
 <<< ../../public/demo/example.js
-
 :::
+
 ## Defer WASM loading with annotation
 
 In this example we tag the script to autoload WASM and create a global vtk namespace.
 
 ::: code-group
-
 <<< ../../public/demo/plain-javascript-annotation.html
 <<< ../../public/demo/example.js
-
 :::
 
 ## Configuration options
@@ -49,10 +44,10 @@ The method `createNamespace(url, config)` takes two arguments. The first one is 
 - `{ rendering: 'webgl', mode: 'async' }`
   - Using WebGL2 for rendering.
   - Using asynchronous method execution.
-  - This require __FIXME Jaswant__ support in your browser
+  - This require WebAssembly JavaScript Promise Integration (JSPI) support in your browser
 - `{ rendering: 'webgpu' }`
   - Using WebGPU for rendering.
   - WebGPU only works with the asynchronous implementation of method execution.
-  - This require __FIXME Jaswant__ support in your browser
+  - This require WebAssembly JavaScript Promise Integration (JSPI) support in your browser
 
 For the __annotation__ usecase you can add `data-config="{'rendering': 'webgpu'}"` attribute in your HTML to adjust the config setting.

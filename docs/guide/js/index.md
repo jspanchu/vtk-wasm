@@ -1,4 +1,4 @@
-# VTK.wasm from JavaScript side
+# VTK.wasm from the JavaScript side
 
 While VTK is a comprehensive C++ library, WASM is giving us an opportunity to enable it on servers and clients like your browser. 
 
