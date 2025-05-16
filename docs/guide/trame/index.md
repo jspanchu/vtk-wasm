@@ -54,3 +54,5 @@ The key take away is that the `vtkRenderWindow` instance needs to be pass to the
 - __`update(push_camera=False)`__: synchronize the current state of the vtkRenderWindow to the client right away.
 - __`update_throttle(push_camera=False)`__: synchronize the current state of the vtkRenderWindow to the client but no more than the provided rate (`view.update_throttle.rate = 15` or in widget constructor `throttle_rate=20`)
 - __`reset_camera(renderer_or_render_window=None)`__: reset the camera by asking the client (JavaScript) to do it.
+
+The [__full working code__](https://github.com/Kitware/vtk-wasm/tree/main/examples/trame/simple) is also available. 

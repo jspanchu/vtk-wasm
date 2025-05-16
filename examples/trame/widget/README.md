@@ -1,4 +1,4 @@
-# Cut
+# Clip
 
 This example aim to illustrate how to connect a VTK 3D widget with VTK.wasm and listen to its changes.
 The code is kept as simple as possible using dummy mesh to just illustrate the core usage of such setup.

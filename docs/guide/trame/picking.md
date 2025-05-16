@@ -27,3 +27,5 @@ The code below highlight some important region and logic to understand.
 3. Call "Pick" on the picker on the WASM side.
 4. If something was found, lookup the actor by making another call and convert the result into an actual vtkObject on the server side. 
 5. Apply some change on the scene and push the update view to the client.
+
+The [__full working code__](https://github.com/Kitware/vtk-wasm/tree/main/examples/trame/picking) is also available. 
