@@ -34,6 +34,7 @@ def apply_settings(property):
 class Pick(TrameApp):
     def __init__(self, server=None):
         super().__init__(server)
+        self._picking_prending = False
         self._setup_vtk()
         self._build_ui()
 
@@ -100,8 +101,7 @@ class Pick(TrameApp):
                     "wasm_listeners",
                     {
                         wasm_interactor_id: {
-                            # Use "MouseMoveEvent" for more flashy interaction
-                            "LeftButtonPressEvent": {
+                            "LeftButtonPressEvent": {  # LeftButtonPressEvent, MouseMoveEvent
                                 "clicked_pos": {
                                     "x": (wasm_interactor_id, "EventPosition", 0),
                                     "y": (wasm_interactor_id, "EventPosition", 1),
@@ -120,17 +120,23 @@ class Pick(TrameApp):
         if clicked_pos is None:
             return
 
-        asynchronous.create_task(self._pick_actor(**clicked_pos))
+        if not self._picking_prending:
+            asynchronous.create_task(self._pick_actor(**clicked_pos))
 
     # endregion trameChange
 
     # region py2wasmCall
     async def _pick_actor(self, x, y):
+        if self._picking_prending:
+            return
+
+        self._picking_prending = True
         # Trigger a pick on client
         picked_worked = await self.ctx.wasm_view.invoke(
             self.picker, "Pick", (x, y, 0), self.renderer
         )
         if not picked_worked:
+            self._picking_prending = False
             return
 
         # Restore previous state
@@ -152,11 +158,13 @@ class Pick(TrameApp):
 
         # Render
         self.ctx.wasm_view.update()
+        self._picking_prending = False
 
         # endregion py2wasmCall
 
 
 def main():
+    # region export
     import sys
 
     app = Pick()
@@ -164,6 +172,7 @@ def main():
         app.ctx.wasm_view.save("porsche.wazex")
 
     app.server.start()
+    # endregion export
 
 
 if __name__ == "__main__":

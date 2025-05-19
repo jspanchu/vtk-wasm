@@ -182,6 +182,7 @@ class Clip(TrameApp):
 
 
 def main():
+    # region export
     import sys
 
     app = Clip()
@@ -189,6 +190,7 @@ def main():
         app.ctx.wasm_view.save("star-fighter.wazex")
 
     app.server.start()
+    # endregion export
 
 
 if __name__ == "__main__":

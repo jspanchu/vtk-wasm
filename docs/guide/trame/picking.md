@@ -1,8 +1,6 @@
 # Call to VTK.wasm from Python
 
-VTK 3D widgets let you interact with the 3D view in a way that you can drive a processing filter interactively.
-
-In the example below we cover how you can create such widget in plain VTK and how to enable it on the client within the WASM context.
+This example capture the usage of a vtkPiker and illustate the usage of method call from Python.
 
 ![Wheel picking](/assets/images/trame/pick1.png)
 
@@ -12,7 +10,7 @@ The code below highlight some important region and logic to understand.
 <<< ../../../examples/trame/picking/pick.py#vtk{py:line-numbers=42} [VTK 3D Widget]
 <<< ../../../examples/trame/picking/pick.py#trameWidget{py:line-numbers=82} [Trame widget]
 <<< ../../../examples/trame/picking/pick.py#trameChange{py:line-numbers=118} [State change]
-<<< ../../../examples/trame/picking/pick.py#py2wasmCall{py:line-numbers=128} [Method call]
+<<< ../../../examples/trame/picking/pick.py#py2wasmCall{py:line-numbers=129} [Method call]
 <<< ../../../examples/trame/picking/pick.py{py:line-numbers} [Full code (pick.py)]
 <<< ../../../examples/trame/picking/requirements.txt
 :::

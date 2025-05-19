@@ -52,7 +52,7 @@ export default defineConfig({
         {
           text: 'Introduction',
           items: [
-            { text: 'Getting started', link: '/guide/index' }
+            { text: 'Getting started', link: '/guide/' }
           ]
         },
         {
@@ -66,7 +66,7 @@ export default defineConfig({
         {
           text: 'For JavaScript developers',
           items: [
-            { text: 'Getting started', link: '/guide/js/index' },
+            { text: 'Getting started', link: '/guide/js/' },
             { text: 'Plain JavaScript', link: '/guide/js/plain' },
             { text: 'Building an application', link: '/guide/js/bundler' },
           ]
@@ -74,7 +74,7 @@ export default defineConfig({
         {
           text: 'For trame users',
           items: [
-            { text: 'Getting started', link: '/guide/trame/index' },
+            { text: 'Getting started', link: '/guide/trame/' },
             { text: '3D Widgets', link: '/guide/trame/widget' },
             { text: 'Method call', link: '/guide/trame/picking' },
           ]
@@ -82,7 +82,7 @@ export default defineConfig({
         {
           text: 'As a data viewer',
           items: [
-            { text: 'Getting started', link: '/guide/viewer/index' },
+            { text: 'Getting started', link: '/guide/viewer/' },
             { text: 'Generating data', link: '/guide/viewer/data' },
           ]
         },
