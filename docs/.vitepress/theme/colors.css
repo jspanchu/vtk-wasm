@@ -8,3 +8,32 @@
     --vp-c-brand-2: #5DAC41;
     --vp-c-sponsor: #ccc;
 }
+
+.viewers-items {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -8px;
+}
+
+.viewers-item {
+    padding: 8px;
+    width: 100%;
+    min-height: 300px;
+}
+
+.viewers-item > iframe {
+    display: block;
+    border: 1px solid var(--vp-c-bg-soft);
+    border-radius: 12px;
+    height: 100%;
+    width: 100%;
+    background-color: var(--vp-c-bg-soft);
+    transition: border-color 0.25s, background-color 0.25s;
+    border: none;
+}
+
+@media (min-width: 768px) {
+    .viewers-grid-3 {
+        width: calc(100% / 3);
+    }
+}

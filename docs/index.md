@@ -47,12 +47,24 @@ features:
       width: 20
     details: Kitware can help you get started intergrating ParaView Catalyst into your simulation. Our team is here to help.  Please contact us
     link: https://www.kitware.com/support
-  - details: '<iframe src="./demo/viewer-basic.html" style="width: 100%; height: 100%; border: none"></iframe>'
-  - details: '<iframe src="./demo/viewer-porsche.html" style="width: 100%; height: 100%; border: none"></iframe>'
-  - details: '<iframe src="./demo/viewer-starfighter.html" style="width: 100%; height: 100%; border: none"></iframe>'
+#  - details: '<iframe src="./demo/viewer-basic.html" style="width: 100%; height: 100%; border: none"></iframe>'
+#  - details: '<iframe src="./demo/viewer-porsche.html" style="width: 100%; height: 100%; border: none"></iframe>'
+#  - details: '<iframe src="./demo/viewer-starfighter.html" style="width: 100%; height: 100%; border: none"></iframe>'
 ---
 <!-- 
 <div style="width: 100%; height: 50vh; border-radius: 12px; overflow: hidden; margin: 1rem 0;">
 <iframe src="./demo/viewer-basic.html" style="width: 100%; height: 100%; border: none;">
 </iframe>
 </div> -->
+
+<div class="viewers-items">
+  <div class="viewers-item viewers-grid-3">
+    <iframe src="./demo/viewer-porsche.html"></iframe>
+  </div>
+  <div class="viewers-item viewers-grid-3">
+    <iframe src="./demo/viewer-basic.html"></iframe>
+  </div>
+  <div class="viewers-item viewers-grid-3">
+    <iframe src="./demo/viewer-starfighter.html"></iframe>
+  </div>
+</div>

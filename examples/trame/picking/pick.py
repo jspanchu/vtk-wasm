@@ -94,6 +94,7 @@ class Pick(TrameApp):
 
                 # => push picker to client
                 view.register_vtk_object(self.picker)
+                view.register_vtk_object(self.last_picked_property) # for pure client edit
 
                 # => attach interactor listener
                 wasm_interactor_id = view.get_wasm_id(self.interactor)
@@ -170,6 +171,12 @@ def main():
     app = Pick()
     if "--export" in sys.argv:
         app.ctx.wasm_view.save("porsche.wazex")
+        # Print ids
+        print(f"render_window:", app.ctx.wasm_view.get_wasm_id(app.render_window))
+        print(f"renderer:", app.ctx.wasm_view.get_wasm_id(app.renderer))
+        print(f"property:", app.ctx.wasm_view.get_wasm_id(app.last_picked_property))
+        print(f"picker:", app.ctx.wasm_view.get_wasm_id(app.picker))
+        print(f"interactor:", app.ctx.wasm_view.get_wasm_id(app.interactor))
 
     app.server.start()
     # endregion export
