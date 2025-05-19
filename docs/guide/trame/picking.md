@@ -7,7 +7,7 @@ This example capture the usage of a vtkPiker and illustate the usage of method c
 The code below highlight some important region and logic to understand.
 
 ::: code-group
-<<< ../../../examples/trame/picking/pick.py#vtk{py:line-numbers=42} [VTK 3D Widget]
+<<< ../../../examples/trame/picking/pick.py#vtk{py:line-numbers=42} [VTK Setup]
 <<< ../../../examples/trame/picking/pick.py#trameWidget{py:line-numbers=82} [Trame widget]
 <<< ../../../examples/trame/picking/pick.py#trameChange{py:line-numbers=118} [State change]
 <<< ../../../examples/trame/picking/pick.py#py2wasmCall{py:line-numbers=129} [Method call]
