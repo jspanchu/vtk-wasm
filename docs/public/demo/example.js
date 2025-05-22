@@ -37,64 +37,59 @@ async function buildWASMScene(vtk) {
     // Working on VTK.wasm
     // => vtkObject creation is directly available on the vtk namespace
     const points = vtk.vtkPoints();
-    const quads = vtk.vtkCellArray()
+    const polys = vtk.vtkCellArray()
     const connectivity = vtk.vtkTypeInt32Array();
     const offsets = vtk.vtkTypeInt32Array();
 
     // Ways to bind JS data to VTK.wasm types
     // => method call are async and needs to be awaited
     // => property can be accessed using the dot notation
-    await points.Data.SetArray(new Float32Array(meshData.points));
-    await connectivity.SetArray(new Int32Array(meshData.connectivity));
-    await offsets.SetArray(new Int32Array(meshData.offsets));
+    await points.data.setArray(new Float32Array(meshData.points));
+    await connectivity.setArray(new Int32Array(meshData.connectivity));
+    await offsets.setArray(new Int32Array(meshData.offsets));
 
     // Calling methods with other vtkObject as arguments
-    await quads.SetData(offsets, connectivity);
+    await polys.setData(offsets, connectivity);
 
     // Using properties to set values as a batch update
     const polyData = vtk.vtkPolyData();
-    polyData.set({
-        Points: points,
-        Polys: quads,
-    })
+    polyData.set({ points, polys })
 
     // Getting values from method call (async) or property (sync)
-    console.log("NumberOfPoints:", await polyData.GetNumberOfPoints()); 
-    console.log("NumberOfCells:", await polyData.GetNumberOfCells());
-    console.log("PolyDataBounds:", await polyData.GetBounds());
+    console.log("NumberOfPoints:", await polyData.getNumberOfPoints());
+    console.log("NumberOfCells:", await polyData.getNumberOfCells());
+    console.log("PolyDataBounds:", await polyData.getBounds());
 
     // Create object with properties in constructor
     const mapper = vtk.vtkPolyDataMapper();
-    await mapper.SetInputData(polyData);
-    const actor = vtk.vtkActor({ Mapper: mapper });
+    await mapper.setInputData(polyData);
+    const actor = vtk.vtkActor({ mapper });
 
     // Setting a property even across vtkObjects
-    // Same as: await (await actor.GetProperty()).SetEdgeVisibility(true);
-    actor.Property.EdgeVisibility = true;
+    // Same as: await (await actor.getProperty()).setEdgeVisibility(true);
+    actor.property.edgeVisibility = true;
 
     // Setup rendering part
     const renderer = vtk.vtkRenderer();
-    await renderer.AddActor(actor);
-    await renderer.ResetCamera();
+    await renderer.addActor(actor);
+    await renderer.resetCamera();
 
     // Create a RenderWindow and bind it to a canvas in the DOM
-    const wasmCanvasSelector = "#vtk-wasm-window";
-    const renderWindow = vtk.vtkRenderWindow({ 
-        CanvasSelector: wasmCanvasSelector,
-    });
-    await renderWindow.AddRenderer(renderer);
+    const canvasSelector = "#vtk-wasm-window";
+    const renderWindow = vtk.vtkRenderWindow({ canvasSelector });
+    await renderWindow.addRenderer(renderer);
     const interactor = vtk.vtkRenderWindowInteractor({ 
-        CanvasSelector: wasmCanvasSelector, 
-        RenderWindow: renderWindow,
+        canvasSelector,
+        renderWindow,
     });
 
     // Trigger render and start interactor
-    await interactor.Render();
-    await interactor.Start();
+    await interactor.render();
+    await interactor.start();
 
     // Observing vtkObject
     const tag = renderWindow.observe("StartEvent", () => {
-        console.log("Camera position", renderer.ActiveCamera.Position);
+        console.log("Camera position", renderer.activeCamera.position);
     });
     setTimeout(() => {
         // Remove observer for one specific tag
@@ -104,6 +99,6 @@ async function buildWASMScene(vtk) {
         renderWindow.unObserveAll();
 
         // Print the full state of a vtkObject
-        console.log("Camera state:", renderer.ActiveCamera.state);
+        console.log("Camera state:", renderer.activeCamera.state);
     }, 30000);
 }
