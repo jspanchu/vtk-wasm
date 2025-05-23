@@ -59,12 +59,14 @@ CMAKE_CONFIGURATION="wasm64" cmake -P ./.gitlab/ci/download_dawn.cmake
 cd vtk
 $env:CMAKE_CONFIGURATION="wasm32"
 cmake -P .\.gitlab\ci\download_dawn.cmake
+$env:emdawnwebgpu_dir = "$PWD\.gitlab\dawn\lib\cmake\emdawnwebgpu" -replace '\\', '/'
 ```
 ```sh [wasm64:Windows]
 # In Powershell
 cd vtk
 $env:CMAKE_CONFIGURATION="wasm64"
 cmake -P .\.gitlab\ci\download_dawn.cmake
+$env:emdawnwebgpu_dir = "$PWD\.gitlab\dawn\lib\cmake\emdawnwebgpu" -replace '\\', '/'
 ```
 :::
 
@@ -79,7 +81,7 @@ emcmake cmake \
 -DCMAKE_BUILD_TYPE=Release \
 -DBUILD_SHARED_LIBS:BOOL=OFF \
 -DVTK_ENABLE_WEBGPU:BOOL=ON \
--Demdawnwebgpu_DIR="$PWD/.gitlab/dawn/lib/cmake/emdawnwebgpu"
+-Demdawnwebgpu_DIR="$env:emdawnwebgpu_dir"
 cmake --build ./buildRelease
 cmake --install ./buildRelease --prefix ./installRelease
 ```
@@ -92,7 +94,7 @@ emcmake cmake \
 -DBUILD_SHARED_LIBS:BOOL=OFF \
 -DVTK_ENABLE_WEBGPU:BOOL=ON \
 -DVTK_WEBASSEMBLY_64_BIT:BOOL=ON \
--Demdawnwebgpu_DIR="$PWD/.gitlab/dawn/lib/cmake/emdawnwebgpu"
+-Demdawnwebgpu_DIR="$env:emdawnwebgpu_dir"
 cmake --build ./buildRelease
 cmake --install ./buildRelease --prefix ./installRelease
 ```
