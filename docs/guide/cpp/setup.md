@@ -49,10 +49,12 @@ Finally, download prebuilt webgpu static libraries and headers for `emdawnwebgpu
 ```sh [wasm32:macOS/Linux]
 cd vtk
 CMAKE_CONFIGURATION="wasm32" cmake -P ./.gitlab/ci/download_dawn.cmake
+export emdawnwebgpu_dir="$PWD/.gitlab/dawn/lib/cmake/emdawnwebgpu"
 ```
 ```sh [wasm64:macOS/Linux]
 cd vtk
 CMAKE_CONFIGURATION="wasm64" cmake -P ./.gitlab/ci/download_dawn.cmake
+export emdawnwebgpu_dir="$PWD/.gitlab/dawn/lib/cmake/emdawnwebgpu"
 ```
 ```sh [wasm32:Windows]
 # In Powershell
@@ -81,7 +83,7 @@ emcmake cmake \
 -DCMAKE_BUILD_TYPE=Release \
 -DBUILD_SHARED_LIBS:BOOL=OFF \
 -DVTK_ENABLE_WEBGPU:BOOL=ON \
--Demdawnwebgpu_DIR="$env:emdawnwebgpu_dir"
+-Demdawnwebgpu_DIR="$emdawnwebgpu_dir"
 cmake --build ./buildRelease
 cmake --install ./buildRelease --prefix ./installRelease
 ```
@@ -94,7 +96,7 @@ emcmake cmake \
 -DBUILD_SHARED_LIBS:BOOL=OFF \
 -DVTK_ENABLE_WEBGPU:BOOL=ON \
 -DVTK_WEBASSEMBLY_64_BIT:BOOL=ON \
--Demdawnwebgpu_DIR="$env:emdawnwebgpu_dir"
+-Demdawnwebgpu_DIR="$emdawnwebgpu_dir"
 cmake --build ./buildRelease
 cmake --install ./buildRelease --prefix ./installRelease
 ```
@@ -107,7 +109,7 @@ emcmake cmake `
 -DCMAKE_BUILD_TYPE=Release `
 -DBUILD_SHARED_LIBS:BOOL=OFF `
 -DVTK_ENABLE_WEBGPU:BOOL=ON `
--Demdawnwebgpu_DIR="$PWD\.gitlab\dawn\lib\cmake\emdawnwebgpu"
+-Demdawnwebgpu_DIR="$env:emdawnwebgpu_dir"
 cmake --build .\buildRelease
 cmake --install .\buildRelease --prefix .\installRelease
 ```
@@ -121,7 +123,7 @@ emcmake cmake `
 -DBUILD_SHARED_LIBS:BOOL=OFF `
 -DVTK_ENABLE_WEBGPU:BOOL=ON `
 -DVTK_WEBASSEMBLY_64_BIT:BOOL=ON `
--Demdawnwebgpu_DIR="$PWD\.gitlab\dawn\lib\cmake\emdawnwebgpu"
+-Demdawnwebgpu_DIR="$env:emdawnwebgpu_dir"
 cmake --build .\buildRelease
 cmake --install .\buildRelease --prefix .\installRelease
 ```
