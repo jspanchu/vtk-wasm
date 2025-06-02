@@ -54,7 +54,7 @@ export async function buildWASMScene(
   await offsets.setArray(new Int32Array(meshData.offsets));
 
   // Calling methods with other vtkObject as arguments
-  await polys.SetData(offsets, connectivity);
+  await polys.setData(offsets, connectivity);
 
   // Using properties to set values as a batch update
   const polyData = vtk.vtkPolyData();
@@ -67,12 +67,12 @@ export async function buildWASMScene(
 
   // Create object with properties in constructor
   const mapper = vtk.vtkPolyDataMapper();
-  await mapper.SetInputData(polyData);
+  await mapper.setInputData(polyData);
   const actor = vtk.vtkActor({ mapper });
 
   // Setting a property even across vtkObjects
   // Same as: await (await actor.getProperty()).setEdgeVisibility(true);
-  actor.Property.edgeVisibility = true;
+  actor.property.edgeVisibility = true;
 
   // Setup rendering part
   const renderer = vtk.vtkRenderer();

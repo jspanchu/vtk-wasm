@@ -20,10 +20,10 @@ uv venv -p 3.10
 source .venv/bin/activate
 
 # install dependencies
-uv pip install "vtk>=9.5"     # get vtk with all the wasm capabilities
-uv pip install "trame>3.9"    # get trame
+uv pip install "vtk==9.5.20250531.dev0" --extra-index-url https://wheels.vtk.org # get latest vtk with all the wasm capabilities
+uv pip install "trame>3.9"    # Install recent trame
 uv pip install trame-vuetify  # - add some nice GUI widget for trame
-uv pip install trame-vtklocal # - add VTK.wasm widget for trame
+uv pip install "trame-vtklocal>=0.12.3" # - add VTK.wasm widget for trame
 ```
 ```sh [Windows]
 # you can choose any Python version where VTK is supported
@@ -32,10 +32,10 @@ uv venv -p 3.10
 .venv\Scripts\activate
 
 # install dependencies
-uv pip install "vtk>=9.5"     # get vtk with all the wasm capabilities
-uv pip install "trame>3.9"    # get trame
+uv pip install "vtk==9.5.20250531.dev0" --extra-index-url https://wheels.vtk.org # get latest vtk with all the wasm capabilities
+uv pip install "trame>3.9"    # Install recent trame
 uv pip install trame-vuetify  # - add some nice GUI widget for trame
-uv pip install trame-vtklocal # - add VTK.wasm widget for trame
+uv pip install "trame-vtklocal>=0.12.3" # - add VTK.wasm widget for trame
 ```
 :::
 
