@@ -94,7 +94,9 @@ class Pick(TrameApp):
 
                 # => push picker to client
                 view.register_vtk_object(self.picker)
-                view.register_vtk_object(self.last_picked_property) # for pure client edit
+                view.register_vtk_object(
+                    self.last_picked_property
+                )  # for pure client edit
 
                 # => attach interactor listener
                 wasm_interactor_id = view.get_wasm_id(self.interactor)
@@ -131,35 +133,39 @@ class Pick(TrameApp):
         if self._picking_prending:
             return
 
-        self._picking_prending = True
-        # Trigger a pick on client
-        picked_worked = await self.ctx.wasm_view.invoke(
-            self.picker, "Pick", (x, y, 0), self.renderer
-        )
-        if not picked_worked:
+        try:
+            self._picking_prending = True
+            # Trigger a pick on client
+            picked_worked = await self.ctx.wasm_view.invoke(
+                self.picker, "Pick", (x, y, 0), self.renderer
+            )
+            if not picked_worked:
+                return
+
+            # Restore previous state
+            if self.last_picked_actor:
+                self.last_picked_actor.property.DeepCopy(self.last_picked_property)
+                self.last_picked_actor = None
+
+            # trame-vtklocal>=0.13.0 auto unwrap vtk object
+            actor = await self.ctx.wasm_view.invoke(self.picker, "GetActor")
+            if actor is None:
+                return
+
+            actor_prop = actor.property
+
+            # Save current state and capture picked actor
+            self.last_picked_property.DeepCopy(actor_prop)
+            self.last_picked_actor = actor
+
+            # Highlight actor
+            actor_prop.color = (1, 0, 1)
+            actor_prop.EdgeVisibilityOn()
+
+        finally:
+            # Render
+            self.ctx.wasm_view.update()
             self._picking_prending = False
-            return
-
-        # Restore previous state
-        if self.last_picked_actor:
-            self.last_picked_actor.property.DeepCopy(self.last_picked_property)
-            self.last_picked_actor = None
-
-        actor_info = await self.ctx.wasm_view.invoke(self.picker, "GetActor")
-        actor = self.ctx.wasm_view.get_vtk_obj(actor_info.get("Id"))
-        actor_prop = actor.property
-
-        # Save current state and capture picked actor
-        self.last_picked_property.DeepCopy(actor_prop)
-        self.last_picked_actor = actor
-
-        # Highlight actor
-        actor_prop.color = (1, 0, 1)
-        actor_prop.EdgeVisibilityOn()
-
-        # Render
-        self.ctx.wasm_view.update()
-        self._picking_prending = False
 
         # endregion py2wasmCall
 

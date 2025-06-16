@@ -2,6 +2,8 @@
 
 trame>=3.9
 trame-vuetify
-trame-vtklocal>=0.12.3
+trame-vtklocal>=0.13
 
-vtk==9.5.20250531.dev0
+# Either vtk version works
+vtk==9.5.20250607.dev0
+# vtk==9.5.0rc3
