@@ -51,7 +51,7 @@ features:
 #  - details: '<iframe src="./demo/viewer-porsche.html" style="width: 100%; height: 100%; border: none"></iframe>'
 #  - details: '<iframe src="./demo/viewer-starfighter.html" style="width: 100%; height: 100%; border: none"></iframe>'
 ---
-<!-- 
+<!--
 <div style="width: 100%; height: 50vh; border-radius: 12px; overflow: hidden; margin: 1rem 0;">
 <iframe src="./demo/viewer-basic.html" style="width: 100%; height: 100%; border: none;">
 </iframe>
@@ -65,6 +65,18 @@ features:
     <iframe src="./demo/viewer-basic.html"></iframe>
   </div>
   <div class="viewers-item viewers-grid-3">
-    <iframe src="./demo/viewer-starfighter.html"></iframe>
+    <iframe src="./demo/viewer-starfighter2.html"></iframe>
   </div>
+</div>
+
+
+<div class="vp-doc home-wrapper" style="margin-top: 2rem;">
+
+# Activities
+
+<!-- @include: ./news.md{,23} -->
+
+---
+[See all news](./news)
+
 </div>
