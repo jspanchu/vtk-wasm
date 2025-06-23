@@ -1,1 +1,101 @@
-Write the business logic of your application in C++ and wrap a simple interface to JavaScript with Embind.
+In this approach, you'll code an interactive WebAssembly application that responds to user actions, such as moving sliders on the web page using C++! You'll also enable mouse and keyboard interaction, set up an HTML page with a canvas element, and connect this canvas to a `vtkRenderWindow` and `vtkRenderWindowInteractor` for rendering and interaction.
+
+# Write native code in C++
+In the following code, a `vtkConeSource` generates polygonal geometry, which is rendered by a `vtkPolyDataMapper`. We also wrap the C++ functions `void setConeResolution(int)` and `void setConeHeight(double)` to JavaScript and connect them to separate sliders that allow adjusting the cone's resolution and height, respectively.
+
+::: code-group
+<<< ../../../examples/cpp/cone/main.cpp#emscriptenKeepalive{cpp:line-numbers=28} [Directly expose C functions]
+<<< ../../../examples/cpp/cone/main.cpp#embindFunctions{cpp:line-numbers=40} [Bind C++ functions with embind]
+<<< ../../../examples/cpp/cone/main.cpp#args{cpp:line-numbers=64} [Argument parsing]
+<<< ../../../examples/cpp/cone/main.cpp#vtk{cpp:line-numbers=91} [VTK setup]
+<<< ../../../examples/cpp/cone/main.cpp#bindCanvas{cpp:line-numbers=116} [Bind canvas]
+<<< ../../../examples/cpp/cone/main.cpp#coneSourceLifecycle{cpp:line-numbers=141} [Cleanup globals]
+<<< ../../../examples/cpp/cone/main.cpp#interactor{cpp:line-numbers=158} [Start interactor]
+<<< ../../../examples/cpp/cone/main.cpp{cpp:line-numbers=1} [Full code (main.cpp)]
+:::
+
+Explaination:
+The referenced sections from `../../../examples/cpp/cone/main.cpp` demonstrate the following:
+
+- **Directly expose C functions**
+
+    Native functions which take or return simple C data types can be wrapped conveniently
+    with an `EMSCRIPTEN_KEEPALIVE` macro. This macro makes the function available in JavaScript with a prefix `_`. Here,
+    a C symbol `setConeResolution` becomes `_setConeResolution`.
+
+    ::: warning
+    Symbols that are wrapped using `EMSCRIPTEN_KEEPALIVE` must have C-style linkage (`extern "C"`), otherwise the symbol name will be mangled like `__Z17setConeResolutioni` which is no fun!
+    :::
+
+- **Bind C++ functions with embind**
+
+    You can wrap any C++ function to JavaScript using the `emscripten::function` construct. Member functions of classes can be wrapped with `emscripten::class`. Emscripten does the to and fro conversion for methods that take or return complex types like `std::string`. You can learn more about this style of wrapping at [emscripten.org/docs](https://emscripten.org/docs/porting/connecting_cpp_and_javascript/embind.html).
+
+- **Argument parsing**
+
+    Command-line arguments allow configuration of the application at startup. This is similar to how you would parse arguments in desktop applications. In WASM, arguments are passed via the `arguments` key to the wasm module object.
+
+- **VTK setup**
+
+    Initialize the VTK pipeline by creating a cone source, mapper, actor, renderer, and render window.
+
+- **Bind canvas**
+
+    Connect the HTML canvas element to the VTK render window. This enables rendering output in the browser.
+
+    ::: danger
+    A number of things can go wrong in this step. You will see an error in the console if the binding is performed too late (after a VTK render call), or when the canvas selector has a spelling mistake.
+    ```js
+    vtkWebAssemblyOpenGLRenderWindow (0x1d3c80): Error (0) initializing WebGL2.
+    vtkWebAssemblyOpenGLRenderWindow (0x1d3c80): Failed to create Emscripten opengl context Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'getParameter')
+    at emscriptenWebGLGet (main.js:1:12409402)
+    at _glGetIntegerv (main.js:1:12411165)
+    at 023050d2:0xc1103
+    at 023050d2:0x4d5c4b
+    at 023050d2:0x4a73b9
+    at 023050d2:0x17d647
+    at 023050d2:0x4d3d4a
+    at 023050d2:0x7108c8
+    at callMain (main.js:1:12453949)
+    at doRun (main.js:1:12454368)
+    ```
+    :::
+
+- **Cleanup globals**
+
+    We ensure that global objects are cleaned up when the interactor gets deleted by doing cleanup in a callback function that observes the `DeleteEvent` on the render window interactor. This application uses globals
+    so that wrapped functions like `setConeResolution` and `render` can access the `vtkConeSource` object and `vtkRenderWindow` object respectively.
+
+- **Start interactor**
+
+    Sets up and starts the VTK render window interactor, enabling mouse and keyboard interaction with the rendered scene.
+
+The full code combines these steps to create a minimal interactive 3D visualization in the browser using VTK, C++, and Embind.
+
+# Interface to the web with HTML
+The HTML provides a canvas with `id` "vtk-wasm-canvas". It also passes the resolution of cone and the canvas selector argument strings to the main wasm program using the `arguments` key in the `Module` dictionary.
+The `main.js` script is generated by emscripten. It checks whether a variable named `Module` is defined in the global scope and imports the configuration like program arguments, canvas, etc from the `Module` object.
+UI callbacks can access the wasm module using the `Module` variable.
+
+::: code-group
+<<< ../../public/demo/cpp-app-1/index.html{html:line-numbers=1} [Full HTML (index.html)]
+:::
+
+
+::: tip
+You can also use the `-sMODULARIZE` + `-sEXPORT_NAME=createModule` emscripten link options which offer a different approach to instantiating
+the wasm runtime.
+That approach lets you call a function `createModule({...options})` that returns a Promise resolving with a handle to the wasm runtime.
+See [emscripten.org/docs](https://emscripten.org/docs/tools_reference/settings_reference.html#modularize) for more information.
+:::
+
+# Build system
+Finally, the CMake code creates a WASM executable by compiling the C++ source code and linking with VTK libraries.
+
+::: code-group
+<<< ../../../examples/cpp/cone/CMakeLists.txt{cmake:line-numbers=1} [Full CMake (CMakeLists.txt)]
+:::
+
+## Result
+
+<iframe src="/vtk-wasm/demo/cpp-app-1/index.html" style="width: 100%; height: 40vh; border: none;"></iframe>

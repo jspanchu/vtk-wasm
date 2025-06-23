@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+</head>
+
+<body>
+  <div>
+    <input type="range" min="3" max="128" value="8" onchange="Module._setConeResolution(this.value); Module.render();"
+      style="position: absolute; top: 1rem; right: 1rem; z-index: 10;" />
+    <input type="range" min="1.0" max="2.0" value="1.0" step="0.1" onchange="Module.setConeHeight(this.value); Module.render();"
+      style="position: absolute; top: 1rem; left: 1rem; z-index: 10;" />
+  </div>
+  <canvas id="vtk-wasm-canvas" tabindex="-1" onclick="focus()"></canvas>
+  <script type="text/javascript">
+    var Module = {
+      arguments: [
+        "--resolution", "8",
+        "--canvas-selector", "#vtk-wasm-canvas"],
+      canvas: () => {
+        return document.querySelector("#vtk-wasm-canvas");
+      },
+    };
+  </script>
+  <script type="text/javascript" src="./main.js"></script>
+</body>
+
+</html>
