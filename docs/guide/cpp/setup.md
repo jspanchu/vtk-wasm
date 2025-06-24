@@ -25,7 +25,7 @@ fnm use 24.0.1
 
 # Download and install EMSDK
 git clone https://github.com/emscripten-core/emsdk.git
-./emsdk/emsdk install 4.0.9
+./emsdk/emsdk install 4.0.10
 export PATH=$PWD/emsdk/upstream/bin:$PWD/emsdk/upstream/emscripten:$PATH
 ```
 ```sh [Windows]
@@ -38,37 +38,8 @@ fnm env --use-on-cd --shell power-shell | Out-String | Invoke-Expression
 fnm use 24.0.1
 
 git clone https://github.com/emscripten-core/emsdk.git
-.\emsdk\emsdk install 4.0.9
+.\emsdk\emsdk install 4.0.10
 $env:PATH="$PWD\emsdk\upstream\bin;$PWD\emsdk\upstream\emscripten;$env:PATH"
-```
-:::
-
-Finally, download prebuilt webgpu static libraries and headers for `emdawnwebgpu`.
-
-::: code-group
-```sh [wasm32:macOS/Linux]
-cd vtk
-CMAKE_CONFIGURATION="wasm32" cmake -P ./.gitlab/ci/download_dawn.cmake
-export emdawnwebgpu_dir="$PWD/.gitlab/dawn/lib/cmake/emdawnwebgpu"
-```
-```sh [wasm64:macOS/Linux]
-cd vtk
-CMAKE_CONFIGURATION="wasm64" cmake -P ./.gitlab/ci/download_dawn.cmake
-export emdawnwebgpu_dir="$PWD/.gitlab/dawn/lib/cmake/emdawnwebgpu"
-```
-```sh [wasm32:Windows]
-# In Powershell
-cd vtk
-$env:CMAKE_CONFIGURATION="wasm32"
-cmake -P .\.gitlab\ci\download_dawn.cmake
-$env:emdawnwebgpu_dir = "$PWD\.gitlab\dawn\lib\cmake\emdawnwebgpu" -replace '\\', '/'
-```
-```sh [wasm64:Windows]
-# In Powershell
-cd vtk
-$env:CMAKE_CONFIGURATION="wasm64"
-cmake -P .\.gitlab\ci\download_dawn.cmake
-$env:emdawnwebgpu_dir = "$PWD\.gitlab\dawn\lib\cmake\emdawnwebgpu" -replace '\\', '/'
 ```
 :::
 
@@ -82,8 +53,7 @@ emcmake cmake \
 -G "Ninja" \
 -DCMAKE_BUILD_TYPE=Release \
 -DBUILD_SHARED_LIBS:BOOL=OFF \
--DVTK_ENABLE_WEBGPU:BOOL=ON \
--Demdawnwebgpu_DIR="$emdawnwebgpu_dir"
+-DVTK_ENABLE_WEBGPU:BOOL=ON
 cmake --build ./buildRelease
 cmake --install ./buildRelease --prefix ./installRelease
 ```
@@ -95,8 +65,7 @@ emcmake cmake \
 -DCMAKE_BUILD_TYPE=Release \
 -DBUILD_SHARED_LIBS:BOOL=OFF \
 -DVTK_ENABLE_WEBGPU:BOOL=ON \
--DVTK_WEBASSEMBLY_64_BIT:BOOL=ON \
--Demdawnwebgpu_DIR="$emdawnwebgpu_dir"
+-DVTK_WEBASSEMBLY_64_BIT:BOOL=ON
 cmake --build ./buildRelease
 cmake --install ./buildRelease --prefix ./installRelease
 ```
@@ -108,8 +77,7 @@ emcmake cmake `
 -G "Ninja" `
 -DCMAKE_BUILD_TYPE=Release `
 -DBUILD_SHARED_LIBS:BOOL=OFF `
--DVTK_ENABLE_WEBGPU:BOOL=ON `
--Demdawnwebgpu_DIR="$env:emdawnwebgpu_dir"
+-DVTK_ENABLE_WEBGPU:BOOL=ON
 cmake --build .\buildRelease
 cmake --install .\buildRelease --prefix .\installRelease
 ```
@@ -122,8 +90,7 @@ emcmake cmake `
 -DCMAKE_BUILD_TYPE=Release `
 -DBUILD_SHARED_LIBS:BOOL=OFF `
 -DVTK_ENABLE_WEBGPU:BOOL=ON `
--DVTK_WEBASSEMBLY_64_BIT:BOOL=ON `
--Demdawnwebgpu_DIR="$env:emdawnwebgpu_dir"
+-DVTK_WEBASSEMBLY_64_BIT:BOOL=ON
 cmake --build .\buildRelease
 cmake --install .\buildRelease --prefix .\installRelease
 ```
