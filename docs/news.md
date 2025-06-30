@@ -1,4 +1,5 @@
 ## 9.5.20250628 is now available!
+
 __June 21, 2025__
 
 You can install the equivalent python wheel with the command
@@ -54,6 +55,7 @@ See [vtk/vtk!12199](https://gitlab.kitware.com/vtk/vtk/-/merge_requests/12199)
 - A few unrelated serialization fixes (`vtkFramebufferPass`, `vtkMapperCollection`)
 
 ## 9.5.20250621 is now available!
+
 __June 21, 2025__
 
 You can install the equivalent python wheel with the command
