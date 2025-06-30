@@ -1,3 +1,17 @@
+## 9.5.20250628 is now available!
+__June 21, 2025__
+
+You can install the equivalent python wheel with the command
+
+```sh
+pip install "vtk==9.5.20250628.dev0" --extra-index-url https://wheels.vtk.org
+```
+
+The WASM bundle is available here:
+
+1. [vtk-9.5.20250628-wasm32-emscripten.tar.gz](https://gitlab.kitware.com/vtk/vtk/-/package_files/5389/download)
+2. [vtk-9.5.20250628-wasm64-emscripten.tar.gz](https://gitlab.kitware.com/vtk/vtk/-/package_files/5388/download)
+
 ## VTK 9.5 is out
 
 __June 24, 2025__
@@ -19,6 +33,7 @@ The WASM bundle is available here:
 __June 23, 2025__
 
 See [vtk/vtk!12192](https://gitlab.kitware.com/vtk/vtk/-/merge_requests/12192)
+- vtkScalarBarActor: update reference coordinates when setting position coordinate.
 - Fix deserialization of `vtkAlgorithm` inputs
 - Fix serialization of `vtkDataSetMapper` inputs
 - Enables (de)serialization of necessary indexed properties in _RenderingAnnotation_
@@ -100,7 +115,7 @@ in the _InteractionWidgets_ module.
 
 __June 4, 2025__
 
-- [vtk/vtk!12167] fixed serialization for various classes and enables serialization for more classes in the _ImagingCore_, _ImagingColor_, _RenderingGridAxes_, and the _RenderingImage_ modules.
+- [vtk/vtk!12167](https://gitlab.kitware.com/vtk/vtk/-/merge_requests/12167) fixed serialization for various classes and enables serialization for more classes in the _ImagingCore_, _ImagingColor_, _RenderingGridAxes_, and the _RenderingImage_ modules.
 - The `vtkSignedCharArray` class now has serialization enabled.
 - The redundant width/height properties of vtkActor2D are now excluded from (de)serialization.
 
@@ -139,7 +154,7 @@ WebGPU classes in VTK are now serialized and available in the vtkWebAssemblyAsyn
 
 __May 27, 2025__
 
-[vtk/vtk!12142] fixes serialization errors that arise when serializing classes in the _RenderingVolume_ module.
+[vtk/vtk!12142](https://gitlab.kitware.com/vtk/vtk/-/merge_requests/12142) fixes serialization errors that arise when serializing classes in the _RenderingVolume_ module.
 
 ## Add standalone and remote session API
 
